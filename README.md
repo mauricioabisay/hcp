@@ -18,3 +18,6 @@ cmd> mysql -u <db-user-name> - p homeopata<homeopata.sql
 		username="<db-user-name>" password="<db-user-pass>"
 		url="jdbc:mysql://localhost/homeopata?useUnicode=true&amp;characterEncoding=UTF-8" />
 This step is optional for development since local context project file is included
+5. Test User:
+User: admin
+Pass: admin
