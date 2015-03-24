@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+@media print {
+	@page {size: 8.5in 14cm}
+	* {border-style: none !important;padding: 0cm !important;font-size: small !important;font-weight:bold !important;}
+	.no-printable{display:none;}
+	.print-inline{display:inline;padding-right: 0.1cm !important;}
+	.print-block{display:block;padding-bottom: 1mm !important;padding-right: 0.1cm !important;}
+	.print-left{float:left;}
+	.print-right{float:right;}
+	.print-text-left{text-align:left;}
+	.print-text-right{text-align:right;}
+	.print-text-center{text-align:center;}
+	.print-column-60{width:60%;}
+	.print-column-40{width:60%;}
+	.print-column-20{width:20%;}
+	.print-column-75{width:75%;}
+	.print-column-50{width:50%;}
+	.print-column-25{width:25%;}
+	.print-column-100{width:100%;clear: both;}
+	.print-footer{position:fixed;top:1cm;font-size: xx-small !important;}
+	.print-p-smaller{font-size:xx-small !important;margin:0;padding:0;margin-top:1mm;}
+}
