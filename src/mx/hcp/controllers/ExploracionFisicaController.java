@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("exploracionfisica")
-@SessionAttributes({"usuario", "paciente"})
+@SessionAttributes({"usuario", "paciente", "exploracion"})
 public class ExploracionFisicaController {
 	@Inject ExploracionFisicaRepository exploracionFisicaRepository;
 	
@@ -64,9 +64,10 @@ public class ExploracionFisicaController {
 		
 		exploracionFisicaRepository.save(exploracionFisica);
 		
+		paciente.setId(form.getPaciente());
+		
 		view.clear();
 		view.setViewName("redirect:/exploracionfisica/" + form.getPaciente());
-		paciente.setExploracion(form);
 		return view;
 	}
 	
@@ -126,7 +127,7 @@ public class ExploracionFisicaController {
 	
 	@RequestMapping(value = "/{idPaciente}", method = RequestMethod.GET)
 	public ModelAndView list(@PathVariable("idPaciente") long idPaciente, Pageable pageable, 
-			@ModelAttribute("usuario") UsuarioSession usuario) {
+			@ModelAttribute("usuario") UsuarioSession usuario, @ModelAttribute("paciente") PacienteSession paciente) {
 		usuario.setCurrent("exploracionFisica");
 		ModelAndView view = new ModelAndView("exploracion_fisica/list");
 		view.addObject("list", exploracionFisicaRepository.findByPacienteOrderByFechaDescIdDesc(idPaciente, pageable));

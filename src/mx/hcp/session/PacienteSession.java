@@ -21,7 +21,6 @@ public class PacienteSession implements Serializable {
 	private String sexo;
 	private String ultimaVisita;
 	private String siguienteVisita;
-	
 	private ExploracionFisicaForm exploracion;
 	
 	public PacienteSession() {}
@@ -31,7 +30,6 @@ public class PacienteSession implements Serializable {
 		this.nombre = paciente.getNombre();
 		this.apellidoPaterno = paciente.getApellidoPaterno();
 		this.apellidoMaterno = paciente.getApellidoMaterno();
-		this.exploracion = exploracion;
 		
 		Period period = Period.between(paciente.getFechaNacimiento().toLocalDate(), LocalDate.now());
 		this.edad = period.getYears() + " años, " + period.getMonths() + " meses, " + period.getDays() + " días";
@@ -52,6 +50,7 @@ public class PacienteSession implements Serializable {
 			this.siguienteVisita = aux.toLocalDate().format(formatter);
 		}
 		
+		this.exploracion = exploracion;
 	}
 	
 	public PacienteSession(long id, String nombre, String apellidoPaterno, String apellidoMaterno, String edad)  {
@@ -125,17 +124,16 @@ public class PacienteSession implements Serializable {
 	public void setSiguienteVisita(String siguienteVisita) {
 		this.siguienteVisita = siguienteVisita;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public ExploracionFisicaForm getExploracion() {
-		return exploracion;
-	}
-
+	
 	public void setExploracion(ExploracionFisicaForm exploracion) {
 		this.exploracion = exploracion;
 	}
 	
+	public ExploracionFisicaForm getExploracion() {
+		return this.exploracion;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }
