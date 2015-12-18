@@ -206,7 +206,7 @@ public class PrescripcionController {
 					form.getMedicamentos() +
 					"\n\nTOMAR 5 GOTAS CADA HORA"
 					+ "\nALTERNANDO LOS NÚMEROS"
-					+ "\nHASTA TERMINAR DE 8:00 AM a 8:00 PM"
+					+ "\nHASTA TERMINAR DE 8:00 AM a 9:00 PM"
 			);
 			break;
 		}

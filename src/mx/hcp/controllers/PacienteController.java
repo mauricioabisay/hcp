@@ -231,6 +231,7 @@ public class PacienteController {
 		if(form.getNombre().equals("")) {
 			view.addObject("pacientes", pacienteRepository.findAll(pageable));
 		} else {
+			//Implementar busqueda por fecha, al igual que eliminacion selectiva
 			String search = "%" + form.getNombre() + "%";
 			view.addObject(
 					"pacientes", 

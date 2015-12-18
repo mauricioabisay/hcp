@@ -22,7 +22,7 @@ function calcularPesoIdeal() {
 <form method="post" class="form-horizontal">
 	<form:hidden path="exploracionFisicaForm.id"/>
 	<form:hidden path="exploracionFisicaForm.paciente"/>
-	
+	<div class="row">
 	<div class="col-sm-6">
 		<fieldset><legend>Peso y Estatura</legend>
 			<c:set var="auxError"><form:errors path="exploracionFisicaForm.peso"/></c:set>
@@ -86,8 +86,8 @@ function calcularPesoIdeal() {
 			</div>
 		</fieldset>
 	</div>
-	
-	
+	</div>
+	<div class="row">
 	<div class="col-sm-12">
 		<fieldset><legend>Observaciones</legend>
 		<c:set var="auxError"><form:errors path="exploracionFisicaForm.observaciones"/></c:set>
@@ -96,11 +96,14 @@ function calcularPesoIdeal() {
 		</div>
 		</fieldset>
 	</div>
+	</div>
 	
+	<div class="row">
 	<div class="form-group col-md-12">
 		<div align="center">
 			<input type="submit" class="btn btn-default" value="Guardar" />
 			<input type="reset" class="btn btn-default" value="Limpiar" />
 		</div>
+	</div>
 	</div>
 </form>

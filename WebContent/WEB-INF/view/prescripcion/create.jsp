@@ -57,7 +57,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<c:set var="auxError"><form:errors path="prescripcionForm.dosis3"/></c:set>
-			<div class="form-group <c:if test='${not empty auxError}'>has-error</c:if>" <c:if test='${prescripcionForm.plantilla<4}'>style="display:none"</c:if>>
+			<div class="form-group <c:if test='${not empty auxError}'>has-error</c:if>" <c:if test='${!(prescripcionForm.plantilla==4)}'>style="display:none"</c:if>>
 				<form:label path="prescripcionForm.dosis3" class="control-label col-sm-4">Dosis Nº3:</form:label>
 				<div class="col-sm-8">
 					<form:input path="prescripcionForm.dosis3" class="form-control"/>

@@ -123,7 +123,12 @@ public class HistoriaClinicaController {
 		ModelAndView view = new ModelAndView("historia_clinica/list");
 		view.addObject("list", historiaClinicaRepository.findByPacienteOrderByFechaDescIdDesc(idPaciente, pageable));
 		
-		String historiaClinicaLegada = pacienteRepository.findOne(idPaciente).getHistoriacli().trim();
+		String historiaClinicaLegada = pacienteRepository.findOne(idPaciente).getHistoriacli();
+		if(historiaClinicaLegada == null) {
+			historiaClinicaLegada = "";
+		} else {
+			historiaClinicaLegada.trim();
+		}
 		view.addObject("historiaClinicaLegada", !historiaClinicaLegada.isEmpty());
 		return view;
 	}

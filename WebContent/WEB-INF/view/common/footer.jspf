@@ -1,2 +1,7 @@
+<footer class="footer">
+	<div class="container text-center no-printable">
+		<p class="text-muted">VERSIÓN DEL 26-Oct-2015</p>
+	</div>
+</footer>
 </body>
 </html>

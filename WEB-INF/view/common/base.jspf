@@ -1,0 +1,123 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mauricio Abisay Lopez Velazquez" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+
+    <title>PHC - Programa de Historia Clínica</title>
+	<c:if test='${usuario.current=="prescripcion"}'>
+		<c:if test='${prescripcionForm.plantilla!=3}'>
+		<link rel="stylesheet" href="<c:url value = '/resources/css/print.css' />" type="text/css" media="print" />
+		</c:if>
+		<c:if test='${prescripcionForm.plantilla==3}'>
+		<link rel="stylesheet" href="<c:url value = '/resources/css/print_small.css' />" type="text/css" media="print" />
+		</c:if>
+	</c:if>
+    <!-- Bootstrap core CSS -->
+    <link href="<c:url value = '/resources/css/bootstrap.min.css' />" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="<c:url value = '/resources/css/bootstrap-theme.min.css' />" rel="stylesheet">
+	  <!--  <link href="<c:url value = '/assets/css/bootstrap-responsive.css' />" rel="stylesheet"> -->
+	  <script src="<c:url value = '/resources/js/jquery-2.1.1.min.js' />"></script>
+	  <script src="<c:url value = '/resources/js/jquery-ui.min.js' />"></script>
+	  <link href="<c:url value = '/resources/js/jquery-ui.min.css' />" rel="stylesheet">
+    <script src="<c:url value = '/resources/js/bootstrap.min.js' />"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="<c:url value='/resources/js/prepareLinks.js' />"></script>
+  </head>
+  <body role="document" class="col-lg-12">
+  <c:if test='${sessionScope.usuario != null}'>
+  	<c:set var="isPaciente" value="${sessionScope.paciente != null && paciente.id > 0}" />
+  
+    <nav class="navbar navbar-default navbar-fixed-top no-printable" role="navigation">
+        <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="${pageContext.request.contextPath}/welcome">PHC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+				
+				<li class="<c:if test='${usuario.current=="datosPaciente"}'>active</c:if>">
+					<c:if test="${!isPaciente}">
+						<a href="${pageContext.request.contextPath}/paciente/create">Datos Paciente</a>
+					</c:if>
+					<c:if test="${isPaciente}">
+						<a href="${pageContext.request.contextPath}/paciente/retrieve/${paciente.id}">Datos Paciente</a>
+					</c:if>
+				</li>
+                
+                <li <c:if test="${!isPaciente}">class="disabled"</c:if><c:if test='${usuario.current=="historiaClinica"}'>class="active"</c:if>>
+                	<a href="${pageContext.request.contextPath}/historiaclinica/${paciente.id}">Historia Clínica</a></li>
+                
+                <li <c:if test="${!isPaciente}">class="disabled"</c:if><c:if test='${usuario.current=="exploracionFisica"}'>class="active"</c:if>>
+                	<a href="${pageContext.request.contextPath}/exploracionfisica/${paciente.id}">Exploración Física</a></li>
+                
+                <li <c:if test="${!isPaciente}">class="disabled"</c:if><c:if test='${usuario.current=="padecimiento"}'>class="active"</c:if>>
+                	<a href="${pageContext.request.contextPath}/padecimiento/${paciente.id}">Padecimiento</a></li>
+                
+                <li <c:if test="${!isPaciente}">class="disabled"</c:if><c:if test='${usuario.current=="prescripcion"}'>class="active"</c:if>>
+                	<a href="${pageContext.request.contextPath}/prescripcion/${paciente.id}">Prescripción</a></li>
+                
+                <li <c:if test="${!isPaciente}">class="disabled"</c:if><c:if test='${usuario.current=="estudio"}'>class="active"</c:if>>
+                	<a href="${pageContext.request.contextPath}/estudio/${paciente.id}">Estudios</a></li>
+                
+                <li class="dropdown <c:if test='${usuario.current=="admin"}'>active</c:if>">
+              		<a href="#" class="dropdown-toggle" data-toggle="dropdown">${usuario.user} <span class="caret"></span></a>
+                	<ul class="dropdown-menu" role="menu">
+                		<li class="<c:if test='${usuario.current=="userConfig"}'>active</c:if>"><a href="${pageContext.request.contextPath}/usuario/update">Configuración</a></li>
+                		<li class="<c:if test='${usuario.current=="usuarios"}'>active</c:if>"><a href="${pageContext.request.contextPath}/usuario/list">Usuarios</a></li>
+                		<li class="<c:if test='${usuario.current=="salir"}'>active</c:if>"><a href="${pageContext.request.contextPath}/logout">Salir</a></li>
+                	</ul>	
+			  	</li>
+              </ul>
+              
+              <form class="navbar-form navbar-left" role="search" method="post" action="${pageContext.request.contextPath}/paciente/">
+                <div class="form-group">
+                  <input name="nombre" type="text" class="form-control" placeholder="Paciente..." />
+                </div>
+                <button type="submit" class="btn btn-default">Buscar</button>
+              </form>
+			  
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+    </nav>
+    <br/>
+    <c:if test="${isPaciente}">
+    	<div class="panel panel-info page-header no-printable">
+    		<div class="panel-heading">
+    		<h4 class="panel-title">
+    			${paciente.id}&nbsp;
+    			${paciente.nombre}&nbsp;${paciente.apellidoPaterno}&nbsp;${paciente.apellidoMaterno}
+    		</h4>
+    		</div>
+    		<table class="table">
+    			<tr>
+    				<td>${paciente.sexo}</td>
+    				<td>${paciente.edad}</td>
+    			</tr>
+    		</table>
+    	</div>
+    </c:if>
+  </c:if>
